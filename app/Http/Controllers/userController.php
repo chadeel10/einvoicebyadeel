@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\user;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class userController extends Controller
 
     public function index()
     {
-        return view('viewalluser');
+        $viewalluser= user::all()->toArray();
+        return view('viewalluser', compact('viewalluser'));
     }
 
     /**
@@ -37,7 +39,12 @@ class userController extends Controller
     {
         //
 
-        $user = User::create(['name' => $request->name, 'designation ' => $request->designation , 'email'=>$request->email  , 'password' => $request->password ]);
+        $user= new user([ 'name'=>$request->get('name'),
+            'email'=>$request->get('email'),
+            'password'=>$request->get('password'),]);
+
+        $user->save();
+        return redirect('/user/create');
     }
 
     /**
@@ -59,7 +66,8 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = user::find($id);
+        return view('edituser',compact('user','id'));
     }
 
     /**
@@ -71,7 +79,12 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = user::find($id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = $request->get('password');
+        $user->save();
+        return redirect('/user');
     }
 
     /**
@@ -82,6 +95,8 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user =user::find($id);
+       $user->delete();
+       return redirect('/user');
     }
 }

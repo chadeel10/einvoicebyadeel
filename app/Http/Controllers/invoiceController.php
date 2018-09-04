@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\invoice;
 
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class invoiceController extends Controller
 
     public function index()
     {
-        return view('viewinvoice');
+        $viewinvoice= invoice::all()->toArray();
+        return view('viewinvoice', compact('viewinvoice'));
     }
 
     /**
@@ -48,7 +50,18 @@ class invoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $invoice= new invoice([ 'subject'=>$request->get('subject'),
+            'invoice_date'=>$request->get('invoicedate'),
+            'due_date'=>$request->get('duedate'),
+            'terms_Condition'=>$request->get('terms&Condition'),
+            'status'=>$request->get('status'),
+            'total'=>$request->get('total'),
+            'discount'=>$request->get('discount'),
+            'net_total'=>$request->get('nettotal')]);
+            
+
+        $invoice->save();
+        return redirect('/invoice/create');
     }
 
     /**

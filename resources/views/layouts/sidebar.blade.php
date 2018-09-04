@@ -22,7 +22,13 @@
                            <a class="nav-link" href="{{url('/invoice/create')}}" style="color: black">Generate invoice</a>
                         </li>
                         <li class="nav-item">
+                           <a class="nav-link" href="{{url('/invoice')}}" style="color: black">View invoice</a>
+                        </li>
+                        <li class="nav-item">
                            <a class="nav-link" href="{{url('/lables')}}" style="color: black">Manage lables</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="{{url('/payment/create')}}" style="color: black">Recive Payments</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="{{url('/payment')}}" style="color: black">Manage payments</a>

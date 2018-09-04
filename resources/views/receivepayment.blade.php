@@ -11,7 +11,9 @@
                 <div class="panel-heading" align="center" style="background-color: #5C5053"><h4 style="color: white">Recive Payment</h4></div>
 
                 <div class="panel-body" style="height: 528px" style="background-color: #AAA2A4">
-                    <form class="form-horizontal" method="POST" action="">
+                    <form class="form-horizontal" method="POST" action="{{url('/payment')}}">
+                        {{csrf_field()}}
+                        {{--
 
                         <div class="form-group">
                             <label for="payment" class="col-md-4 control-label">Payment Type</label>
@@ -22,6 +24,7 @@
                                 </select>
                             </div>
                         </div>
+                        --}}
 
                          <div class="form-group">
                             <label for="amount" class="col-md-4 control-label">Amount</label>

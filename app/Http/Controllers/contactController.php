@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\contact;
 use Illuminate\Http\Request;
 
 class contactController extends Controller
@@ -25,7 +25,8 @@ class contactController extends Controller
 
     public function index()
     {
-        return view('viewcontact');
+        $viewcontact= contact::all()->toArray();
+        return view('viewcontact', compact('viewcontact'));
     }
 
     /**
@@ -46,8 +47,14 @@ class contactController extends Controller
      */
     public function store(Request $request)
     {
-        //
-         $user = User::create(['name' => $request->name, 'businessname ' => $request->businessname , 'contact'=>$request->contact  , 'address' => $request->address ]);
+        $contact= new contact([ 'owner_name'=>$request->get('name'),
+            'business_name'=>$request->get('businessname'),
+            'business_phone'=>$request->get('contact'),
+            'contact_address'=>$request->get('address')]);
+
+        $contact->save();
+        return redirect('/contact');
+        
     }
 
     /**
@@ -67,9 +74,10 @@ class contactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($contact_id)
     {
-        //
+        $contact = contact::find($contact_id);
+        return view('editcontact',compact('contact','id'));
     }
 
     /**
@@ -79,9 +87,15 @@ class contactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $contact_id)
     {
-        //
+        $contact = contact::find($contact_id);
+        $contact->owner_name = $request->get('name');
+        $contact->business_name = $request->get('businessname');
+        $contact->business_phone = $request->get('contact');
+        $contact->contact_address = $request->get('address');
+        $contact->save();
+        return redirect('/contact');
     }
 
     /**
@@ -92,7 +106,10 @@ class contactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contact =contact::find($id);
+       $contact->delete();
+       return redirect('/contact');
+
     }
 }
 

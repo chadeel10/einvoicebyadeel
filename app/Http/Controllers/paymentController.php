@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\payment;
 
 class paymentController extends Controller
 /*{
@@ -26,7 +27,8 @@ class paymentController extends Controller
 
     public function index()
     {
-        return view('viewpayments');
+        $viewpayments= payment::all()->toArray();
+        return view('viewpayments', compact('viewpayments'));
     }
 
     /**
@@ -47,7 +49,13 @@ class paymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $payment= new payment([ 'payment_amount'=>$request->get('amount'),
+            'payment_received'=>$request->get('received'),
+            'payment_remaining'=>$request->get('remaining'),
+            'payment_remarks'=>$request->get('remarks')]);
+
+        $payment->save();
+        return redirect('/payment/create');
     }
 
     /**
@@ -69,7 +77,8 @@ class paymentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $payment = payment::find($id);
+        return view('editpayment',compact('payment','id'));
     }
 
     /**
@@ -81,7 +90,13 @@ class paymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $payment = payment::find($id);
+        $payment->payment_amount = $request->get('amount');
+        $payment->payment_received = $request->get('received');
+        $payment->payment_remaining = $request->get('remaining');
+        $payment->payment_remarks = $request->get('remarks');
+        $payment->save();
+        return redirect('/payment');
     }
 
     /**
@@ -92,7 +107,9 @@ class paymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $payment =payment::find($id);
+       $payment->delete();
+       return redirect('/payment');
     }
 }
 

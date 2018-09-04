@@ -11,7 +11,8 @@
                 <div class="panel-heading" style="background-color: #5C5053"><h4 style="color: white">Add Contact</h4></div>
 
                 <div class="panel-body" style="height: 528px" style="background-color: #AAA2A4">
-                    <form class="form-horizontal" method="POST" action="">
+                    <form class="form-horizontal" method="POST" action="{{url('/contact')}}">
+                        {{csrf_field()}}
 
                        {{-- <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Select Label</label>
@@ -29,6 +30,7 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name"  required autofocus>
+
                             </div>
                         </div>
 
@@ -39,6 +41,7 @@
                                 <input id="businessname" type="text" class="form-control" name="businessname"  required autofocus>
                             </div>
                         </div>
+                        {{--
 
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
@@ -47,7 +50,7 @@
                                 <input id="email" type="email" class="form-control" name="email" required>
                             </div>
                         </div>
-
+--}}
                         <div class="form-group">
                             <label for="contact" class="col-md-4 control-label">Contact</label>
 

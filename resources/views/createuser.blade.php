@@ -11,7 +11,8 @@
                 <div class="panel-heading" style="background-color: #5C5053"><h4 style="color: white">Create New User</h4></div>
 
                 <div class="panel-body" style="height: 528px" style="background-color: #AAA2A4">
-                    <form class="form-horizontal" method="POST" action="">
+                    <form class="form-horizontal" method="POST" action="{{url('/user')}}">
+                        {{csrf_field()}}
 
                         <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Name</label>
@@ -20,6 +21,7 @@
                                 <input id="name" type="text" class="form-control" name="name"  required autofocus>
                             </div>
                         </div>
+                        {{--
 
                          <div class="form-group">
                             <label for="designation" class="col-md-4 control-label">Designation</label>
@@ -28,6 +30,7 @@
                                 <input id="designation" type="text" class="form-control" name="designation"  required autofocus>
                             </div>
                         </div>
+                        --}}
 
                        {{-- <div class="form-group">
                             <label for="type" class="col-md-4 control-label">Select Type</label>

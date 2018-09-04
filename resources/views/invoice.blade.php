@@ -11,7 +11,10 @@
                 <div class="panel-heading" style="background-color: #5C5053"><h4 style="color: white">Invoice</h4></div>
 
                 <div class="panel-body" style="background-color: #AAA2A4">
-                    <form class="form-horizontal" method="POST" action="">
+                    <form class="form-horizontal" method="POST" action="{{url('/invoice')}}">
+                        {{csrf_field()}}
+
+                        {{--
 
                         <div class="form-group">
                             <div class="col-md-5">
@@ -31,6 +34,7 @@
                                     </select>
                             </div>
                         </div>
+                        --}}
 
                          <div class="form-group">
                             <div class="col-md-5">
@@ -125,12 +129,17 @@
                         </div>
 
                     
+                            <div class="form-group">
                             <div class="col-md-10 " align="right">
-                         <button type="button"  class="btn btn-success"> Create </button>
-                         <button type="button" class="btn btn-primary"> Cancel </button>
+                         <button type="submit" class="btn btn-primary">
+                                    Create
+                                </button>
+                                <div>
+                         <button type="button" class="btn btn-danger"> Cancel </button>
                          <button type="button" onclick="myCreateFunction()" class="btn btn-info">
                                                  Add Row  
                                             </button>
+                                        </div>
                       </div>
                         </div>
                     </form>
@@ -144,7 +153,7 @@
 
 
 <script>
-    alert("Hello! I am an alert box!");
+    
     
     function myCreateFunction() {
     var table = document.getElementById("myTable");

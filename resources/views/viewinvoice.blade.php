@@ -15,14 +15,13 @@
                     <table class="table">
                         <thead style="background-color: #BBAFB2">
                             <tr>
-                               <th>Lable</th> 
-                               <th>Customer</th>
+                              {{-- <th>Lable</th> 
+                               <th>Customer</th>--}}
+                               <th>Subject</th>
                                <th>Invoice Date</th>
                                <th>Due Date</th>
-                               <th>Subject</th>
-                               <th>Serial</th>
-                               <th>Item</th>
-                               <th>Unit Price</th>
+                  
+                               
                                <th>Total</th>
                                <th>Discount</th>
                                <th>Net Total</th>
@@ -30,7 +29,17 @@
                             </tr>
                         </thead>
                         <tbody style="background-color: #FAEDF0">
-                            <tr></tr> 
+                           @foreach($viewinvoice as $invoice)
+                            <tr>
+                              <td>{{$invoice['subject']}}</td>
+                              <td>{{$invoice['invoice_date']}}</td>
+                              <td>{{$invoice['due_date']}}</td>
+                              <td>{{$invoice['total']}}</td>
+                              <td>{{$invoice['discount']}}</td>
+                              <td>{{$invoice['net_total']}}</td>
+                              <td>{{$invoice['status']}}</td>
+                            </tr>
+                            @endforeach 
                         </tbody>
                     </table>
                 </div>
